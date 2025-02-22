@@ -91,6 +91,16 @@ func (c *Client) SendText(ctx context.Context, roomID, text string) error {
 	})
 }
 
+func (c *Client) SendHTML(ctx context.Context, roomID, html string) error {
+	return c.sendMessage(ctx, apiSendMsgReq{
+		RoomID:        roomID,
+		Type:          "m.text",
+		Format:        "org.matrix.custom.html",
+		Body:          html,
+		FormattedBody: html,
+	})
+}
+
 type Media struct {
 	Type     MediaType
 	Caption  string
